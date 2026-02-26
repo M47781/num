@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAU DE PARFUM – Numidia Lezoul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f5e6a3;
+            --gold-dark: #b8962e;
+            --bg-deep: #020202;
+            --white: #f5f5f5;
+            --ease-luxury: cubic-bezier(0.23, 1, 0.32, 1);
+            --insta-color: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --yt-color: #FF0000;
+        }
+
+        body, html { margin: 0; padding: 0; background: var(--bg-deep); color: var(--white); font-family: 'Montserrat', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* ====== شاشة التحميل ====== */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: opacity 1s var(--ease-luxury), visibility 1s;
+        }
+        .loader-logo { font-family: 'Cinzel Decorative', serif; font-size: 2rem; color: var(--gold); letter-spacing: 5px; animation: pulseLogo 2s ease-in-out infinite; }
+        @keyframes pulseLogo { 0%, 100% { opacity: 0.3; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
+        .loader-hidden { opacity: 0; visibility: hidden; }
+
+        /* ====== تأثيرات الخلفية المحسنة ====== */
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        
+        .bokeh-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden; filter: blur(60px); pointer-events: none;
+        }
+        .bokeh-orb {
+            position: absolute; border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            animation: float-bokeh 20s infinite alternate ease-in-out;
+        }
+        @keyframes float-bokeh { 0% { transform: translate(0, 0) scale(1); opacity: 0.2; } 100% { transform: translate(100px, 100px) scale(1.2); opacity: 0.5; } }
+
+        .mobile-container {
+            position: relative; z-index: 1; width: 100%; max-width: 480px; margin: 0 auto;
+            background: radial-gradient(circle at center, rgba(40, 35, 20, 0.5) 0%, #050505 80%, #000 100%);
+            min-height: 100vh; padding-bottom: 40px;
+        }
+
+        /* ====== الهيرو ====== */
+        .hero-section { position: relative; width: 100%; overflow: hidden; min-height: 420px; display: flex; align-items: center; justify-content: center; }
+        .hero-image { 
+            width: 100%; height: auto; display: block; z-index: 2;
+            animation: floatingHero 8s ease-in-out infinite;
+        }
+        @keyframes floatingHero { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.03); } }
+        .hero-text { position: absolute; z-index: 3; bottom: 5%; width: 100%; text-align: center; }
+
+        /* ====== الأزرار والأيقونات ====== */
+        .content-section { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .anim-reveal { opacity: 0; transform: translateY(30px); filter: blur(10px); transition: all 1.2s var(--ease-luxury); }
+        .anim-reveal.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+        .btn { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px; border-radius: 40px; text-decoration: none; font-size: 0.95rem; font-weight: 700; transition: 0.4s var(--ease-luxury); cursor: pointer; border: none; }
+        
+        .btn--shop { 
+            background: linear-gradient(270deg, var(--gold-dark), var(--gold-light), var(--gold), var(--gold-light), var(--gold-dark)); 
+            background-size: 400% 400%; color: #000; 
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); 
+            animation: gold-flow 6s ease infinite; 
+        }
+        @keyframes gold-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .btn--glass { border: 1px solid rgba(212, 175, 55, 0.3); color: var(--white); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); }
+        .btn--glass:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.1); }
+
+        /* ألوان الأيقونات */
+        .fa-instagram { background: var(--insta-color); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.5rem; }
+        .fa-youtube { color: var(--yt-color); font-size: 1.5rem; }
+        .fa-envelope { color: var(--gold); font-size: 1.4rem; }
+        .fa-star { color: var(--gold); }
+
+        .banner-title { font-family: 'Cinzel Decorative', serif; font-size: 1.7rem; letter-spacing: 2px; background: linear-gradient(to right, var(--gold-dark), var(--gold-light), var(--gold-dark)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer { text-align: center; padding: 50px 20px; color: var(--gold); font-size: 0.8rem; opacity: 0.6; letter-spacing: 2px; }
+    </style>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-logo">NUMIDIA</div>
+        <div style="color: var(--gold); font-size: 0.7rem; margin-top: 15px; letter-spacing: 5px;">CE QUE JE PORTE</div>
+    </div>
+
+    <div class="bokeh-container">
+        <div class="bokeh-orb" style="width: 500px; height: 500px; top: -10%; left: -20%;"></div>
+        <div class="bokeh-orb" style="width: 600px; height: 600px; bottom: -5%; right: -20%;"></div>
+    </div>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="mobile-container">
+        <header class="hero-section">
+            <img src="hero.png" alt="Numidia Lezoul" class="hero-image" id="heroImg">
+            <div class="hero-text anim-reveal">
+                <span class="banner-title">CE QUE JE PORTE</span><br>
+                <span style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gold); letter-spacing: 6px;">NUMIDIA LEZOUL</span>
+                <div style="width: 60px; height: 1.5px; background: var(--gold); margin: 15px auto; opacity: 0.8;"></div>
+                <span style="font-family: 'Amiri', serif; font-size: 1.5rem; color: rgba(255,255,255,0.95);">عطر فاخر بلمسة أنثوية ساحرة</span>
+            </div>
+        </header>
+
+        <main class="content-section">
+            <a href="https://parfumnumidia.com/products/ce-que-je-porte" target="_blank" class="btn btn--shop anim-reveal">
+                <i class="fa-solid fa-bag-shopping"></i> تسوقي الآن
+            </a>
+            
+            <a href="https://www.instagram.com/numidialezoul_official/" target="_blank" class="btn btn--glass anim-reveal">
+                <i class="fa-brands fa-instagram"></i> انستغرام
+            </a>
+
+            <a href="https://www.youtube.com/channel/UCIkmEe-fWe80bna7R1oASyA" target="_blank" class="btn btn--glass anim-reveal">
+                <i class="fa-brands fa-youtube"></i> يوتيوب
+            </a>
+
+            <a href="mailto:numidialezoul19@gmail.com" class="btn btn--glass anim-reveal">
+                <i class="fa-solid fa-envelope"></i> تواصل معنا (البريد)
+            </a>
+
+            <div class="testimonial-card anim-reveal" style="background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.15); padding: 30px; border-radius: 25px; text-align: center; backdrop-filter: blur(10px); margin-top: 10px;">
+                <div style="margin-bottom: 15px; letter-spacing: 8px;">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p style="font-family: 'Amiri', serif; font-size: 1.35rem; line-height: 1.8; color: #fff; margin: 0;">
+                    "فخامة تليق بكل امرأة جزائرية تعشق التميز."
+                </p>
+            </div>
+        </main>
+
+        <footer class="footer anim-reveal">
+            <p>&copy; 2026 NUMIDIA LEZOUL. SIGNATURE COLLECTION</p>
+        </footer>
+    </div>
+
+    <script>
+        // محرك النجوم الضخمة المتلألئة
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: -2000, y: -2000 };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('touchstart', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<32; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 6 + 4, // نجوم ضخمة
+                    speed: Math.random() * 0.15 + 0.1,
+                    velX: (Math.random() - 0.5) * 0.2,
+                    opacity: Math.random(),
+                    twinkle: Math.random() * 0.012
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p) => {
+                p.y -= p.speed; p.x += p.velX;
+                let dx = mouse.x - p.x; let dy = mouse.y - p.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 200) { p.x -= dx/40; p.y -= dy/40; }
+                p.opacity += p.twinkle;
+                if(p.opacity > 0.9 || p.opacity < 0.2) p.twinkle *= -1;
+                if(p.y < 0) p.y = canvas.height;
+                if(p.x < 0) p.x = canvas.width;
+                if(p.x > canvas.width) p.x = 0;
+
+                ctx.save();
+                ctx.shadowBlur = 30; ctx.shadowColor = "rgba(212, 175, 55, 0.8)";
+                ctx.fillStyle = `rgba(212, 175, 55, ${Math.abs(p.opacity)})`;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
+                
+                // قلب النجمة الساطع
+                ctx.fillStyle = `rgba(255, 245, 220, ${p.opacity + 0.1})`;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI*2); ctx.fill();
+                ctx.restore();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('loader-hidden');
+                document.getElementById('heroImg').classList.add('loaded');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.anim-reveal').forEach(el => observer.observe(el));
+            }, 1200);
+        });
+
+        initCanvas(); draw();
+        window.addEventListener('resize', initCanvas);
+    </script>
+</body>
+</html>
